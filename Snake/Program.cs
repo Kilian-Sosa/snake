@@ -30,3 +30,12 @@ namespace Snake {
             } while (keyInfo.Key != ConsoleKey.Escape);
         }
 
+        public static bool HasLost() {
+            if (snake.body[0, 0] == 0 || snake.body[0, 0] == game.width - 1 || snake.body[0, 1] == 0 || snake.body[0, 1] == game.height - 1) return true;
+            for (int i = 1; i < snake.size; i++) 
+                if (snake.body[0, 0] == snake.body[i, 0] && snake.body[0, 1] == snake.body[i, 1]) return true;
+            return false;
+        }
+
+    }
+}

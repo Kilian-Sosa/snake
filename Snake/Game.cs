@@ -34,5 +34,20 @@
                 Console.WriteLine(line);
             }
         }
+
+        public void MoveSnake(Snake snake) {
+            map[snake.tail[0], snake.tail[1]] = " ";
+            for (int i = snake.size - 1; i > 0; i--) {
+                snake.body[i, 0] = snake.body[i - 1, 0];
+                snake.body[i, 1] = snake.body[i - 1, 1];
+            }
+            snake.body[0, 0] += snake.directionVector[0];
+            snake.body[0, 1] += snake.directionVector[1];
+            snake.tail[0] = snake.body[snake.size - 1, 0];
+            snake.tail[1] = snake.body[snake.size - 1, 1];
+            for (int i = 0; i < snake.size; i++) {
+                map[snake.body[i, 0], snake.body[i, 1]] = "▣";
+            }
+        }
     }
 }
