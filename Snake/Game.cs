@@ -49,5 +49,18 @@
                 map[snake.body[i, 0], snake.body[i, 1]] = "▣";
             }
         }
+
+        public void SpawnFruit() {
+            while (true) {
+                Random random = new Random();
+                int x = random.Next(1, width - 1);
+                int y = random.Next(1, height - 1);
+                if (map[x, y] == " ") {
+                    map[x, y] = "◉";
+                    fruit = new int[] { x, y };
+                    break;
+                }
+            }
+        }
     }
 }

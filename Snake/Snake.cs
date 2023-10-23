@@ -67,5 +67,16 @@
             this.direction = direction;
         }
 
+        public void Grow() {
+            size++;
+            int[,] newBody = new int[size, 2];
+            for (int i = 0; i < size - 1; i++) {
+                newBody[i, 0] = body[i, 0];
+                newBody[i, 1] = body[i, 1];
+            }
+            newBody[size - 1, 0] = tail[0];
+            newBody[size - 1, 1] = tail[1];
+            body = newBody;
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace Snake {
         public static void Run() {
             ConsoleKeyInfo keyInfo;
             game.Draw();
+            game.SpawnFruit();
             do {
                 keyInfo = Console.ReadKey(true);
                 switch (keyInfo.Key) {
@@ -27,6 +28,7 @@ namespace Snake {
                         snake.ChangeDirection(1);
                         break;
                 }
+                Eat();
             } while (keyInfo.Key != ConsoleKey.Escape);
         }
 
@@ -37,5 +39,13 @@ namespace Snake {
             return false;
         }
 
+        public static void Eat() {
+            if (snake.body[0, 0] == game.fruit[0] && snake.body[0, 1] == game.fruit[1]) {
+                snake.Grow();
+                game.score++;
+                game.SpawnFruit();
+            }
+            if (game.score % 10 == 0 && gameTimer.Interval >= 400) gameTimer.Interval -= timerUpdate;
+        }
     }
 }
