@@ -29,10 +29,11 @@
             for (int i = 0; i < height; i++) {
                 string line = "";
                 for (int j = 0; j < width; j++) {
-                    line += map[j, i];
+                    line += map[j, i] + " ";
                 }
                 Console.WriteLine(line);
             }
+            Console.WriteLine("Fruits eaten: " + score);
         }
 
         public void MoveSnake(Snake snake) {

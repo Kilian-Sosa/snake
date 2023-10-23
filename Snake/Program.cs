@@ -3,7 +3,7 @@ using Timer = System.Timers.Timer;
 
 namespace Snake {
     public class Program {
-        static Game game = new Game(28, 61);
+        static Game game = new Game(28, 60);
         static Snake snake = new Snake(3, new int[] { 3, 14 }, 1);
         static Timer gameTimer;
         static int initTimer = 800;
@@ -63,7 +63,6 @@ namespace Snake {
             game.Draw();
             if (HasLost()) {
                 Console.WriteLine("You lost!");
-                Console.WriteLine("Score: " + game.score);
                 gameTimer.Stop();
             }
             Eat();
