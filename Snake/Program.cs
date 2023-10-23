@@ -1,7 +1,13 @@
+﻿using System.Timers;
+using Timer = System.Timers.Timer;
+
 namespace Snake {
     public class Program {
         static Game game = new Game(28, 61);
         static Snake snake = new Snake(3, new int[] { 3, 14 }, 1);
+        static Timer gameTimer;
+        static int initTimer = 800;
+        static int timerUpdate = 100;
 
         public static void Main(string[] args) {
             Console.OutputEncoding = System.Text.Encoding.UTF8; // For the symbols to work
@@ -12,6 +18,9 @@ namespace Snake {
             ConsoleKeyInfo keyInfo;
             game.Draw();
             game.SpawnFruit();
+            gameTimer = new Timer(initTimer); // One second interval
+            gameTimer.Elapsed += HandleTimerElapsed;
+            gameTimer.Start();
             do {
                 keyInfo = Console.ReadKey(true);
                 switch (keyInfo.Key) {
@@ -46,6 +55,18 @@ namespace Snake {
                 game.SpawnFruit();
             }
             if (game.score % 10 == 0 && gameTimer.Interval >= 400) gameTimer.Interval -= timerUpdate;
+        }
+
+        public static void HandleTimerElapsed(object sender, ElapsedEventArgs e) {
+            game.MoveSnake(snake);
+            Console.Clear();
+            game.Draw();
+            if (HasLost()) {
+                Console.WriteLine("You lost!");
+                Console.WriteLine("Score: " + game.score);
+                gameTimer.Stop();
+            }
+            Eat();
         }
     }
 }
