@@ -38,7 +38,7 @@ namespace Snake {
                         break;
                 }
                 Eat();
-            } while (keyInfo.Key != ConsoleKey.Escape);
+            } while (keyInfo.Key != ConsoleKey.Escape || HasLost());
         }
 
         public static bool HasLost() {
@@ -53,8 +53,8 @@ namespace Snake {
                 snake.Grow();
                 game.score++;
                 game.SpawnFruit();
+                if (game.score % 10 == 0 && gameTimer.Interval >= 400) gameTimer.Interval -= timerUpdate;
             }
-            if (game.score % 10 == 0 && gameTimer.Interval >= 400) gameTimer.Interval -= timerUpdate;
         }
 
         public static void HandleTimerElapsed(object sender, ElapsedEventArgs e) {
