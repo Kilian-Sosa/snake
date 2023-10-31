@@ -63,6 +63,7 @@ namespace Snake {
             if (HasLost()) {
                 Console.WriteLine("You lost!");
                 GameTimer.Stop();
+                Environment.Exit(0);
             }
             Eat();
         }
